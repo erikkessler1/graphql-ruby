@@ -30,6 +30,9 @@ module Dummy
   class BaseInputObject < GraphQL::Schema::InputObject
   end
 
+  class BaseOneOfInputObject < GraphQL::Schema::OneOfInputObject
+  end
+
   class BaseScalar < GraphQL::Schema::Scalar
   end
 
@@ -237,6 +240,11 @@ module Dummy
   class Animal < BaseUnion
     description "Species of living things"
     possible_types Cow, Goat
+  end
+
+  class OneOfInput < BaseOneOfInputObject
+    argument :string, String
+    argument :int, Integer
   end
 
   class AnimalAsCow < BaseUnion
@@ -465,6 +473,13 @@ module Dummy
     field :huge_integer, Integer
     def huge_integer
       GraphQL::Types::Int::MAX + 1
+    end
+
+    field :one_of_arg_field, String do
+      argument :one_of_arg, OneOfInput
+    end
+    def one_of_arg_field(one_of_arg: nil)
+      one_of_arg.string
     end
   end
 

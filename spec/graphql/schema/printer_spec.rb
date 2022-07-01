@@ -365,6 +365,7 @@ type __Type {
   fields(includeDeprecated: Boolean = false): [__Field!]
   inputFields(includeDeprecated: Boolean = false): [__InputValue!]
   interfaces: [__Type!]
+  isOneOf: Boolean
   kind: __TypeKind!
   name: String
   ofType: __Type
